@@ -1,16 +1,15 @@
 /* eslint-disable prettier/prettier */
-import Svg, { G, Path } from "react-native-svg";
+import Svg, { G, Path } from 'react-native-svg';
+import { useThemeColors } from '../hooks/useThemeColors';
 
-export function Logo() {
+export function Logo({ width = 125, height = 52 }) {
+  const { colors, colorScheme } = useThemeColors();
+
   return (
-    <Svg
-      width="530.000000pt"
-      height="158.000000pt"
-      viewBox="0 0 530.000000 158.000000"
-    >
-      <G fill="#172a4a">
+    <Svg width={width} height={height} viewBox="0 0 530.000000 158.000000">
+      <G fill={colorScheme === 'dark' ? colors.text : colors.primary}>
         <Path
-          fill="#0059d7"
+          fill={colors.secondary}
           d="M2638 1555c-97-37-179-118-233-230-33-69-65-193-65-257-1-28-7-37-43-59-79-48-82-61-82-399V315l28-57c35-72 107-137 201-183 178-88 430-87 612 2 71 35 156 111 192 172l27 46 3 290c2 190 0 303-8 327-13 45-52 93-91 114-25 13-29 20-29 58 0 61-33 184-70 257-40 78-114 157-182 194-45 24-67 29-138 32-56 2-98-2-122-12zm180-181c80-33 133-108 158-223 23-112 48-101-227-101h-242l5 64c16 193 164 319 306 260zm6-637c88-50 102-173 27-241-17-16-21-31-21-88v-68h-170v68c0 56-4 72-20 87-10 9-27 37-36 61-51 133 94 253 220 181z"
           transform="matrix(.1 0 0 -.1 0 158)"
         />
