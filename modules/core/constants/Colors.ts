@@ -12,6 +12,7 @@ export const Colors = {
     secondaryTransparent: 'hsla(215, 100%, 42%, 0.5)',
     primaryLight: '#dce6f3',
     secondaryLight: '#e6f2ff',
+    inputColor: '#E0E0E0',
   },
   dark: {
     text: '#e0e0e0',
@@ -25,5 +26,6 @@ export const Colors = {
     secondaryTransparent: 'hsla(215, 100%, 50%, 0.6)',
     primaryLight: '#244a7f',
     secondaryLight: '#1e5aa3',
+    inputColor: '#1e293b',
   },
 };
