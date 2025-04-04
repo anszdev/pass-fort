@@ -50,5 +50,6 @@ Join our community of developers creating universal apps.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 
 ## Inspiracion 
-[text](https://dribbble.com/shots/25565169-Scanner-Mobile-App-Design)
 [text](https://dribbble.com/shots/22939189-Login-Mobile-App)
+[text](https://dribbble.com/shots/23161510-Makko-UX-UI-mobile-application-design-for-a-social-network)
+[text](https://dribbble.com/shots/24911825-Travel-Mobile-App)
