@@ -1,6 +1,6 @@
-/* eslint-disable prettier/prettier */
 import Svg, { G, Path } from 'react-native-svg';
 import { useThemeColors } from '../hooks/useThemeColors';
+import Feather from '@expo/vector-icons/Feather';
 
 export function Logo({ width = 125, height = 52 }) {
   const { colors, colorScheme } = useThemeColors();
@@ -21,3 +21,5 @@ export function Logo({ width = 125, height = 52 }) {
     </Svg>
   );
 }
+
+export const FeaterIcon = Feather;
