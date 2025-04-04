@@ -5,13 +5,18 @@ import { OtpField } from '@auth/components/OtpField';
 import { FormLinkBottom } from '@/modules/auth/components/FormLink';
 import { View } from 'react-native';
 import { ButtonIcon } from '@/modules/core/components/ButtonIcon';
+import { Link } from 'expo-router';
 
 export default function VerifyOtpCodeScreen() {
   const [code, setCode] = useState('');
 
   return (
     <FormContainer
-      actionContent={<ButtonIcon icon="arrow-right" variant="primary" />}
+      actionContent={
+        <Link href="/password" asChild>
+          <ButtonIcon icon="arrow-right" variant="primary" />
+        </Link>
+      }
     >
       <FormTitle salute="Hey 🤫" title="Verifica el codigo" />
       <View style={{ marginTop: 46 }}>
