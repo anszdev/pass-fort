@@ -14,12 +14,13 @@ interface ButtonProps {
   text: string;
   onPress?: () => void;
   variant?: 'primary' | 'transparent';
+  width?: 'full' | 'fit';
 }
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
 export const Button = forwardRef((props: ButtonProps, ref: Ref<any>) => {
-  const { text, onPress, variant } = props;
+  const { text, onPress, variant = 'primary', width = 'full' } = props;
   const {
     colors: { primary, secondary, textInverted },
   } = useThemeColors();
@@ -41,7 +42,11 @@ export const Button = forwardRef((props: ButtonProps, ref: Ref<any>) => {
   };
 
   return (
-    <Pressable style={styles.button} onPress={handlePress} ref={ref}>
+    <Pressable
+      style={[styles.button, { width: width === 'full' ? '100%' : 'auto' }]}
+      onPress={handlePress}
+      ref={ref}
+    >
       {variant !== 'transparent' && (
         <View style={styles.gradientContainer}>
           <AnimatedLinearGradient
