@@ -1,40 +1,49 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 import { useThemeColors } from '../hooks/useThemeColors';
 import { FeaterIcon } from './Icons';
+import Animated from 'react-native-reanimated';
+import { useAnimateInput } from '../hooks/useAnimateInput';
 
-type LabelProps = {
-  label: string;
+interface LabelProps extends TextInputProps {
+  label?: string;
   icon?: 'hash' | 'lock';
-  value: string;
-  onChange?: (text: string) => void;
   textContentType?: 'telephoneNumber' | 'password' | 'emailAddress' | undefined;
-};
+}
 
-export function Field({
+export const Field = ({
   label = '',
   icon,
-  value = '',
-  onChange,
   textContentType,
   ...props
-}: LabelProps) {
+}: LabelProps) => {
   const { colors } = useThemeColors();
+  const { animatedStyle, handleFocus, handleBlur } = useAnimateInput();
 
   return (
-    <View style={[styles.field, { backgroundColor: colors.inputColor }]}>
-      {icon && <FeaterIcon name={icon} size={24} color={colors.text} />}
+    <Animated.View
+      style={[
+        styles.field,
+        {
+          backgroundColor: colors.inputColor,
+        },
+        animatedStyle,
+      ]}
+    >
+      {icon && <FeaterIcon name={icon} size={18} color={colors.text} />}
       <TextInput
         placeholder={label}
         placeholderTextColor={colors.text}
-        value={value}
-        onChangeText={onChange}
         textContentType={textContentType}
-        {...props}
         style={[styles.fieldInput, { color: colors.text }]}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...props}
       />
-    </View>
+    </Animated.View>
   );
-}
+};
+
+Field.displayName = 'Field';
 
 const styles = StyleSheet.create({
   field: {
@@ -45,9 +54,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   fieldInput: {
     fontSize: 16,
     fontFamily: 'Raleway500',
+    flex: 1,
   },
 });
