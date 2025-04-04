@@ -3,15 +3,15 @@ import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
 import { Fonts } from '@core/constants/Fonts';
-/* import * as SystemUI from 'expo-system-ui'; */
+import * as SystemUI from 'expo-system-ui';
 
 export default function RootLayout() {
   const [loaded] = useFonts(Fonts);
   const { colors } = useThemeColors();
 
-  /* useEffect(() => {
+  useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
-  }, [colors.background]); */
+  }, [colors.background]);
 
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
@@ -30,6 +30,7 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: false,
         contentStyle: { backgroundColor: colors.background },
+        navigationBarColor: colors.background,
       }}
     >
       <Stack.Screen name="(auth)" />
