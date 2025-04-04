@@ -1,18 +1,25 @@
 import { Stack } from 'expo-router';
 import { useThemeColors } from '@core/hooks/useThemeColors';
-import { Header } from '@auth/components/HeaderLayout';
+import { HeaderAuthLayout } from '@auth/components/HeaderLayout';
 
 export default function AuthLayout() {
   const { colors } = useThemeColors();
   return (
     <Stack
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerTitle: () => null,
-        header: () => <Header backgroundColor={colors.background} />,
-      }}
+        header: () => (
+          <HeaderAuthLayout
+            backgroundColor={colors.background}
+            route={route.name}
+          />
+        ),
+      })}
     >
-      <Stack.Screen name="welcome" />
-      <Stack.Screen name="auth" />
+      <Stack.Screen name="index" />
+      <Stack.Screen name="login" />
+      <Stack.Screen name="(register)" />
+      <Stack.Screen name="reset-password" />
     </Stack>
   );
 }
