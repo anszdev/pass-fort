@@ -3,10 +3,10 @@ import { Container } from '@core/components/Container';
 
 export function FormContainer({
   children,
-  actionContent,
+  formFooter,
 }: {
   children: React.ReactNode;
-  actionContent: React.ReactNode;
+  formFooter: React.ReactNode;
 }) {
   return (
     <Container>
@@ -14,10 +14,13 @@ export function FormContainer({
       <View
         style={{
           marginVertical: 24,
-          alignItems: 'flex-end',
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: '100%',
+          justifyContent: 'space-between',
         }}
       >
-        {actionContent}
+        {formFooter}
       </View>
     </Container>
   );

@@ -7,19 +7,23 @@ import { FormLinkTop } from '@auth/components/FormLink';
 import { FormContainer } from '@auth/components/FormContainer';
 import { Link } from 'expo-router';
 import { ButtonIcon } from '@core/components/ButtonIcon';
+import { Steps } from '@auth/components/Steps';
 
 export default function Register() {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <FormContainer
-      actionContent={
-        <Link href="/(auth)/(register)/otp-code" asChild>
-          <ButtonIcon
-            icon="arrow-right"
-            variant="primary"
-            disabled={!isChecked}
-          />
-        </Link>
+      formFooter={
+        <>
+          <Steps steps={3} currentStep={1} />
+          <Link href="/(auth)/(register)/otp-code" asChild>
+            <ButtonIcon
+              icon="arrow-right"
+              variant="primary"
+              disabled={!isChecked}
+            />
+          </Link>
+        </>
       }
     >
       <FormTitle title="Registrate ahora!" salute="Hey, bienvenid@ 👋🏽" />

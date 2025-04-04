@@ -6,16 +6,20 @@ import { FormLinkBottom } from '@/modules/auth/components/FormLink';
 import { View } from 'react-native';
 import { ButtonIcon } from '@/modules/core/components/ButtonIcon';
 import { Link } from 'expo-router';
+import { Steps } from '@/modules/auth/components/Steps';
 
 export default function VerifyOtpCodeScreen() {
   const [code, setCode] = useState('');
 
   return (
     <FormContainer
-      actionContent={
-        <Link href="/password" asChild>
-          <ButtonIcon icon="arrow-right" variant="primary" />
-        </Link>
+      formFooter={
+        <>
+          <Steps steps={3} currentStep={2} />
+          <Link href="/password" asChild>
+            <ButtonIcon icon="arrow-right" variant="primary" />
+          </Link>
+        </>
       }
     >
       <FormTitle salute="Hey 🤫" title="Verifica el codigo" />
