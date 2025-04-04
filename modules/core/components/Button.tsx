@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { StyleSheet } from 'react-native';
 import { Pressable, Text, View } from 'react-native';
 import Animated, {
@@ -9,19 +8,20 @@ import Animated, {
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '../hooks/useThemeColors';
-import { forwardRef, Ref } from 'react';
+import { forwardRef, type Ref } from 'react';
 
 interface ButtonProps {
   text: string;
   onPress?: () => void;
+  variant?: 'primary' | 'transparent';
 }
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
 export const Button = forwardRef((props: ButtonProps, ref: Ref<any>) => {
-  const { text, onPress } = props;
+  const { text, onPress, variant } = props;
   const {
-    colors: { primary, secondary },
+    colors: { primary, secondary, textInverted },
   } = useThemeColors();
   const gradientPosition = useSharedValue(0);
   const animatedGradientStyle = useAnimatedStyle(() => ({
@@ -36,22 +36,30 @@ export const Button = forwardRef((props: ButtonProps, ref: Ref<any>) => {
 
   const handlePress = () => {
     gradientPosition.value = gradientPosition.value === 0 ? 1 : 0;
-
     if (!onPress) return;
-
     onPress();
   };
+
   return (
     <Pressable style={styles.button} onPress={handlePress} ref={ref}>
-      <View style={styles.gradientContainer}>
-        <AnimatedLinearGradient
-          colors={[primary, secondary, secondary]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={[styles.gradient, animatedGradientStyle]}
-        />
-      </View>
-      <Text style={styles.text}>{text}</Text>
+      {variant !== 'transparent' && (
+        <View style={styles.gradientContainer}>
+          <AnimatedLinearGradient
+            colors={[primary, secondary, secondary]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={[styles.gradient, animatedGradientStyle]}
+          />
+        </View>
+      )}
+      <Text
+        style={[
+          styles.text,
+          { color: variant === 'transparent' ? textInverted : '#ffffff' },
+        ]}
+      >
+        {text}
+      </Text>
     </Pressable>
   );
 });
@@ -66,6 +74,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   gradientContainer: {
     position: 'absolute',
@@ -79,7 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    color: '#ffffff',
     fontWeight: '500',
     fontSize: 16,
     zIndex: 1,
