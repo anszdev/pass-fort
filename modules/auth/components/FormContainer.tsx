@@ -11,7 +11,14 @@ export function FormContainer({
   return (
     <Container>
       <View>{children}</View>
-      <View style={{ marginVertical: 24 }}>{actionContent}</View>
+      <View
+        style={{
+          marginVertical: 24,
+          alignItems: 'flex-end',
+        }}
+      >
+        {actionContent}
+      </View>
     </Container>
   );
 }
