@@ -12,6 +12,7 @@ export function Steps({ steps, currentStep }: StepsProps) {
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
       {Array.from({ length: steps }).map((_, index) => (
         <View
+          key={index}
           style={{
             width: 14,
             height: 14,
