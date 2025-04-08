@@ -1,5 +1,6 @@
 import { useColorScheme } from 'react-native';
 import { Colors } from '../constants/Colors';
+import { FontSizes } from '../constants/Fonts';
 
 export function useThemeColors() {
   const colorScheme = useColorScheme();
@@ -8,5 +9,6 @@ export function useThemeColors() {
   return {
     colors,
     colorScheme,
+    fontSizes: FontSizes,
   };
 }
