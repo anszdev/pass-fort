@@ -7,19 +7,32 @@ type FormTitleProps = {
 };
 
 export function FormTitle({ title, salute }: FormTitleProps) {
-  const { colors } = useThemeColors();
+  const { colors, fontSizes } = useThemeColors();
 
   return (
     <View style={{ marginTop: 82 }}>
-      <Text style={[styles.formTitle, { color: colors.text }]}>{salute}</Text>
-      <Text style={[styles.formTitle, { color: colors.text }]}>{title}</Text>
+      <Text
+        style={[
+          styles.formTitle,
+          { color: colors.text, fontSize: fontSizes.formTitle },
+        ]}
+      >
+        {salute}
+      </Text>
+      <Text
+        style={[
+          styles.formTitle,
+          { color: colors.text, fontSize: fontSizes.formTitle },
+        ]}
+      >
+        {title}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   formTitle: {
-    fontSize: 32,
     fontFamily: 'Raleway600',
     marginBottom: 5,
   },
