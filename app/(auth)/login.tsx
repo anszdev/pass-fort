@@ -7,7 +7,7 @@ import { FormContainer } from '@auth/components/FormContainer';
 
 export default function Login() {
   return (
-    <FormContainer actionContent={<Button text="Iniciar Sesión" />}>
+    <FormContainer formFooter={<Button text="Iniciar Sesión" />}>
       <FormTitle title="Inicia sesión ahora!" salute="Hey 👋🏽" />
       <FormLinkTop
         href="/(auth)/(register)"
