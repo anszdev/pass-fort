@@ -34,6 +34,7 @@ export const Field = ({
         placeholder={label}
         placeholderTextColor={colors.text}
         textContentType={textContentType}
+        secureTextEntry={textContentType === 'password'}
         style={[styles.fieldInput, { color: colors.text }]}
         onFocus={handleFocus}
         onBlur={handleBlur}
