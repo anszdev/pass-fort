@@ -1,7 +1,7 @@
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Logo } from '@core/components/Icons';
-import { ButtonIcon } from '@core/components/ButtonIcon';
+import { FeaterIcon, Logo } from '@core/components/Icons';
+import { useThemeColors } from '@core/hooks/useThemeColors';
 
 export function HeaderAuthLayout({
   backgroundColor,
@@ -11,12 +11,15 @@ export function HeaderAuthLayout({
   route?: string;
 }) {
   const router = useRouter();
+  const { colors } = useThemeColors();
 
   return (
     <View style={[styles.header, { backgroundColor }]}>
       {route !== 'index' && (
         <View style={styles.buttonContainer}>
-          <ButtonIcon icon="chevron-left" onPress={() => router.back()} />
+          <Pressable onPress={() => router.back()}>
+            <FeaterIcon name="chevron-left" size={24} color={colors.text} />
+          </Pressable>
         </View>
       )}
       <View style={styles.logoContainer}>
