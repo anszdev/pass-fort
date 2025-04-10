@@ -13,6 +13,7 @@ export const Colors = {
     primaryLight: '#dce6f3',
     secondaryLight: '#e6f2ff',
     inputColor: '#E0E0E0',
+    error: '#D32F2F',
   },
   dark: {
     text: '#e0e0e0',
@@ -27,5 +28,6 @@ export const Colors = {
     primaryLight: '#244a7f',
     secondaryLight: '#1e5aa3',
     inputColor: '#1e293b',
+    error: '#FF6B6B',
   },
 };
