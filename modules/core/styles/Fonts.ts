@@ -6,6 +6,14 @@ export const Fonts = {
   Raleway900: require('@assets/fonts/Raleway900.ttf'),
 };
 
+export const FontFamilies = {
+  base: 'Raleway500',
+  medium: 'Raleway600',
+  bold: 'Raleway700',
+  extrabold: 'Raleway800',
+  black: 'Raleway900',
+};
+
 export const FontSizes = {
   base: 16,
   titile: 24,
