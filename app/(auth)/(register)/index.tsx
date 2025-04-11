@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { FieldCheck } from '@core/components/FieldCheck';
-import { Field } from '@core/components/Field';
+import { Input } from '@/modules/core/components/Input';
 import { FormTitle } from '@auth/components/FormTitle';
 import { FormLinkTop } from '@auth/components/FormLink';
 import { FormContainer } from '@auth/components/FormContainer';
@@ -33,7 +33,7 @@ export default function Register() {
         description="¿Ya tienes cuenta?"
       />
       <View style={{ gap: 24 }}>
-        <Field label="Correo o Número de Telefono" value="" icon="hash" />
+        <Input label="Correo o Número de Telefono" value="" icon="hash" />
         <FieldCheck
           label="Acepto los términos y condiciones"
           toggleCheck={setIsChecked}
