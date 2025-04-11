@@ -2,7 +2,7 @@ import { useThemeColors } from '@core/hooks/useThemeColors';
 import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
-import { Fonts } from '@core/constants/Fonts';
+import { Fonts } from '@core/styles/Fonts';
 import * as SystemUI from 'expo-system-ui';
 
 export default function RootLayout() {
