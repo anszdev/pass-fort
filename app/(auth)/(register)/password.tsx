@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { Field } from '@core/components/Field';
+import { Input } from '@/modules/core/components/Input';
 import { Button } from '@core/components/Button';
 import { FormContainer } from '@auth/components/FormContainer';
 import { FormTitle } from '@auth/components/FormTitle';
