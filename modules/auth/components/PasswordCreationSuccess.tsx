@@ -48,7 +48,11 @@ export function PasswordCreationSuccess({
 
   return (
     <Animated.View
-      style={[screen, successViewStyle, { backgroundColor: colors.background }]}
+      style={[
+        styles.screen,
+        successViewStyle,
+        { backgroundColor: colors.background },
+      ]}
     >
       <Animated.View style={[{ flex: 1, justifyContent: 'center' }]}>
         <Animated.View
