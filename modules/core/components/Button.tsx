@@ -43,7 +43,12 @@ export const Button = forwardRef((props: ButtonProps, ref: Ref<any>) => {
 
   return (
     <Pressable
-      style={[styles.button, { width: width === 'full' ? '100%' : 'auto' }]}
+      style={[
+        styles.button,
+        {
+          width: width === 'full' ? '100%' : 'auto',
+        },
+      ]}
       onPress={handlePress}
       ref={ref}
     >
