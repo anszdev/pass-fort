@@ -1,13 +1,39 @@
 import { View } from 'react-native';
+import { useForm } from 'react-hook-form';
 import { Button } from '@core/components/Button';
-import { Field } from '@core/components/Field';
+import { InputFormControl } from '@core/components/InputFormControl';
 import { FormTitle } from '@auth/components/FormTitle';
 import { FormLinkBottom, FormLinkTop } from '@auth/components/FormLink';
 import { FormContainer } from '@auth/components/FormContainer';
+import { EMAIL_RULES, PASSWORD_RULES } from '@auth/constants/formRules';
+
+type FormData = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log('data', data);
+  };
+
   return (
-    <FormContainer formFooter={<Button text="Iniciar Sesión" />}>
+    <FormContainer
+      formFooter={
+        <Button text="Iniciar Sesión" onPress={handleSubmit(onSubmit)} />
+      }
+    >
       <FormTitle title="Inicia sesión ahora!" salute="Hey 👋🏽" />
       <FormLinkTop
         href="/(auth)/(register)"
@@ -15,8 +41,23 @@ export default function Login() {
         description="¿Aún no tienes cuenta?"
       />
       <View style={{ gap: 24 }}>
-        <Field label="Correo o Número de Telefono" icon="hash" />
-        <Field label="Contraseña" icon="lock" />
+        <InputFormControl
+          control={control}
+          errors={errors}
+          rules={EMAIL_RULES}
+          name="email"
+          label="Correo electrónico"
+          icon="mail"
+        />
+        <InputFormControl
+          control={control}
+          errors={errors}
+          rules={PASSWORD_RULES}
+          name="password"
+          label="Tu Contraseña"
+          icon="lock"
+          type="password"
+        />
       </View>
       <FormLinkBottom
         href="/reset-password"
