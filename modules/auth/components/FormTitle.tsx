@@ -1,5 +1,6 @@
-import { useThemeColors } from '@core/hooks/useThemeColors';
 import { View, Text, StyleSheet } from 'react-native';
+import { FONT_SIZE } from '@core/styles/Fonts';
+import { useThemeColors } from '@core/hooks/useThemeColors';
 
 type FormTitleProps = {
   title: string;
@@ -7,14 +8,14 @@ type FormTitleProps = {
 };
 
 export function FormTitle({ title, salute }: FormTitleProps) {
-  const { colors, fontSizes } = useThemeColors();
+  const { colors } = useThemeColors();
 
   return (
     <View style={{ marginTop: 82 }}>
       <Text
         style={[
           styles.formTitle,
-          { color: colors.text, fontSize: fontSizes.formTitle },
+          { color: colors.text, fontSize: FONT_SIZE.formTitle },
         ]}
       >
         {salute}
@@ -22,7 +23,7 @@ export function FormTitle({ title, salute }: FormTitleProps) {
       <Text
         style={[
           styles.formTitle,
-          { color: colors.text, fontSize: fontSizes.formTitle },
+          { color: colors.text, fontSize: FONT_SIZE.formTitle },
         ]}
       >
         {title}
