@@ -52,10 +52,7 @@ export const Input = ({
         secureTextEntry={isPassword && !isPasswordVisible}
         style={[styles.fieldInput, { color: colors.text }]}
         onFocus={handleFocus}
-        onBlur={(e) => {
-          animateBlur();
-          props.onBlur?.(e);
-        }}
+        onEndEditing={animateBlur}
         {...props}
       />
       {type === 'password' && (
