@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Container } from '@core/components/Container';
 
 export function FormContainer({
@@ -10,18 +10,32 @@ export function FormContainer({
 }) {
   return (
     <Container>
-      <View>{children}</View>
-      <View
-        style={{
-          marginVertical: 24,
-          flexDirection: 'row',
-          alignItems: 'center',
-          width: '100%',
-          justifyContent: 'space-between',
-        }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={10}
       >
-        {formFooter}
-      </View>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
+        >
+          <View>{children}</View>
+        </ScrollView>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '100%',
+            justifyContent: 'space-between',
+            paddingBottom: 24,
+            paddingTop: 16,
+          }}
+        >
+          {formFooter}
+        </View>
+      </KeyboardAvoidingView>
     </Container>
   );
 }
