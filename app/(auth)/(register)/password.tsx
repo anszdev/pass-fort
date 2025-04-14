@@ -33,17 +33,11 @@ export default function Password() {
       >
         <FormTitle title="Crea y confirma tu contraseña" salute="Hey 🤐" />
         <View style={{ gap: 24, marginTop: 46 }}>
-          <Input
-            label="Contraseña"
-            icon="lock"
-            textContentType="password"
-            secureTextEntry
-          />
+          <Input label="Contraseña" icon="lock" textContentType="password" />
           <Input
             label="Confirma la contraseña"
             icon="lock"
             textContentType="password"
-            secureTextEntry
           />
         </View>
       </FormContainer>
