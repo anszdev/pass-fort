@@ -46,7 +46,7 @@ export function InputFormControl({
             fontSize: FONT_SIZE.sm,
             color: colors.error,
             fontFamily: FONT_FAMILY.medium,
-            marginTop: 4,
+            marginTop: 6,
           }}
         >
           {String(errors[name]?.message)}
