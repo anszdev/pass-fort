@@ -1,5 +1,6 @@
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { Container } from '@core/components/Container';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 export function FormContainer({
   children,
@@ -10,32 +11,26 @@ export function FormContainer({
 }) {
   return (
     <Container>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      <KeyboardAwareScrollView
         style={{ flex: 1 }}
-        keyboardVerticalOffset={10}
+        bottomOffset={8}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
-        >
-          <View>{children}</View>
-        </ScrollView>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: '100%',
-            justifyContent: 'space-between',
-            paddingBottom: 24,
-            paddingTop: 16,
-          }}
-        >
-          {formFooter}
-        </View>
-      </KeyboardAvoidingView>
+        <View style={{ flexGrow: 1, paddingBottom: 100 }}>{children}</View>
+      </KeyboardAwareScrollView>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: '100%',
+          justifyContent: 'space-between',
+          paddingBottom: 24,
+          paddingTop: 16,
+        }}
+      >
+        {formFooter}
+      </View>
     </Container>
   );
 }
