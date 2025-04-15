@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { Container } from '@core/components/Container';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { Container } from '@core/components/Container';
 
 export function FormContainer({
   children,
