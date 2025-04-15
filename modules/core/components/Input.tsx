@@ -5,6 +5,7 @@ import Animated from 'react-native-reanimated';
 import { useAnimateInput } from '../hooks/useAnimateInput';
 import { type FieldError } from 'react-hook-form';
 import { useState } from 'react';
+import { FONT_FAMILY, FONT_SIZE } from '../styles/Fonts';
 
 export interface InputProps extends TextInputProps {
   label?: string;
@@ -78,14 +79,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: 12,
     borderWidth: 2,
     borderColor: 'transparent',
   },
   fieldInput: {
-    fontSize: 16,
+    fontSize: FONT_SIZE.base,
     height: 52,
-    fontFamily: 'Raleway500',
+    fontFamily: FONT_FAMILY.base,
     flex: 1,
   },
 });
