@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   otp: {
     borderRadius: 6,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: 'transparent',
   },
   otpInput: {
