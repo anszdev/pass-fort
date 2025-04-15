@@ -72,8 +72,8 @@ Input.displayName = 'Input';
 
 const styles = StyleSheet.create({
   field: {
-    paddingVertical: 8,
     paddingHorizontal: 16,
+    paddingVertical: 1,
     overflow: 'hidden',
     borderRadius: 6,
     flexDirection: 'row',
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
   fieldInput: {
     fontSize: 16,
+    height: 52,
     fontFamily: 'Raleway500',
     flex: 1,
   },
