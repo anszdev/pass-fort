@@ -1,14 +1,29 @@
+import { useState } from 'react';
 import { View } from 'react-native';
-import { Input } from '@/modules/core/components/Input';
+import { useForm } from 'react-hook-form';
 import { Button } from '@core/components/Button';
+import { InputFormControl } from '@core/components/InputFormControl';
 import { FormContainer } from '@auth/components/FormContainer';
 import { FormTitle } from '@auth/components/FormTitle';
 import { Steps } from '@auth/components/Steps';
-import { useState } from 'react';
-import { PasswordCreationSuccess } from '@/modules/auth/components/PasswordCreationSuccess';
+import { PasswordCreationSuccess } from '@auth/components/PasswordCreationSuccess';
+import {
+  CONFIRM_PASSWORD_RULES,
+  PASSWORD_RULES,
+} from '@/modules/auth/constants/formRules';
 
 export default function Password() {
   const [accountCreated, setAccountCreated] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      password: '',
+      confirmPassword: '',
+    },
+  });
 
   const createAccount = () => {
     console.log('contraseña confirmada');
@@ -26,18 +41,30 @@ export default function Password() {
               text="Crear Cuenta"
               variant="primary"
               width="fit"
-              onPress={createAccount}
+              onPress={handleSubmit(createAccount)}
             />
           </>
         }
       >
         <FormTitle title="Crea y confirma tu contraseña" salute="Hey 🤐" />
         <View style={{ gap: 24, marginTop: 46 }}>
-          <Input label="Contraseña" icon="lock" textContentType="password" />
-          <Input
+          <InputFormControl
+            control={control}
+            name="password"
+            errors={errors}
+            rules={PASSWORD_RULES}
+            label="Contraseña"
+            icon="lock"
+            type="password"
+          />
+          <InputFormControl
+            control={control}
+            name="confirmPassword"
+            errors={errors}
+            rules={CONFIRM_PASSWORD_RULES}
             label="Confirma la contraseña"
             icon="lock"
-            textContentType="password"
+            type="password"
           />
         </View>
       </FormContainer>
