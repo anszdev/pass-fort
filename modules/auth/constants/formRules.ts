@@ -39,6 +39,10 @@ export const PASSWORD_RULES: RegisterOptions = {
         valid: /[!@#$%^&*_+\-:;,.?~]/.test(value),
       },
       {
+        label: '🚫 No más de 2 caracteres repetidos seguidos',
+        valid: /^(?!.*(.)\1{2,})/.test(value),
+      },
+      {
         label: '🚫 Sin espacios',
         valid: !/\s/.test(value),
       },
