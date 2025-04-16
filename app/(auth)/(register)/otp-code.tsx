@@ -52,8 +52,19 @@ export default function VerifyOtpCodeScreen() {
         </>
       }
     >
-      <FormTitle salute="Hey 🤫" title="Verifica el codigo" />
+      <FormTitle salute="Hey 🤫" title="Verifica el código" />
       <View style={{ marginTop: 46 }}>
+        <Text
+          style={{
+            fontSize: FONT_SIZE.base,
+            fontFamily: FONT_FAMILY.medium,
+            color: colors.text,
+            marginBottom: 16,
+          }}
+        >
+          Lo enviamos a:
+          <Text style={{ color: colors.primary }}> ang****@gmail.com</Text>
+        </Text>
         <OtpField code={code} onCodeChange={handleCodeChange} />
         {error && (
           <Text
@@ -69,7 +80,7 @@ export default function VerifyOtpCodeScreen() {
         )}
       </View>
       <FormLinkBottom
-        description="¿No te llego el codigo?"
+        description="¿No te llego el código?"
         href="/"
         textLink="Reenviar"
       />

@@ -46,7 +46,7 @@ export default function Password() {
           </>
         }
       >
-        <FormTitle title="Crea y confirma tu contraseña" salute="Hey 🤐" />
+        <FormTitle title="Crea y confirma tu contraseña!" salute="Hey 🙈" />
         <View style={{ gap: 24, marginTop: 46 }}>
           <InputFormControl
             control={control}
@@ -62,7 +62,7 @@ export default function Password() {
             name="confirmPassword"
             errors={errors}
             rules={CONFIRM_PASSWORD_RULES}
-            label="Confirma la contraseña"
+            label="Confirma la Contraseña"
             icon="lock"
             type="password"
           />

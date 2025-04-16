@@ -46,7 +46,7 @@ export default function Login() {
           errors={errors}
           rules={EMAIL_RULES}
           name="email"
-          label="Correo electrónico"
+          label="Correo Electrónico"
           icon="mail"
         />
         <InputFormControl
@@ -61,7 +61,7 @@ export default function Login() {
       </View>
       <FormLinkBottom
         href="/reset-password"
-        textLink="Reseteala"
+        textLink="Resetéala"
         description="¿Olvidaste tu contraseña?"
       />
     </FormContainer>

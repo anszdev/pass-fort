@@ -59,11 +59,11 @@ export default function Register() {
           errors={errors}
           rules={EMAIL_RULES}
           name="email"
-          label="Correo electrónico"
+          label="Correo Electrónico"
           icon="mail"
         />
         <FieldCheck
-          label="Acepto los términos y condiciones"
+          label="Acepto los Términos y Condiciones"
           toggleCheck={setIsChecked}
           isChecked={isChecked}
         />
