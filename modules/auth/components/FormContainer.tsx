@@ -12,10 +12,10 @@ export function FormContainer({
   return (
     <Container>
       <KeyboardAwareScrollView
-        style={{ flex: 1 }}
         bottomOffset={8}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ flexGrow: 1 }}
       >
         <View style={{ flexGrow: 1, paddingBottom: 100 }}>{children}</View>
       </KeyboardAwareScrollView>
