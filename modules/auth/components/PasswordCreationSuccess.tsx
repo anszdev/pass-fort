@@ -1,15 +1,16 @@
-import { Button } from '@/modules/core/components/Button';
-import { ShieldCheck } from '@/modules/core/components/Icons';
-import { useThemeColors } from '@/modules/core/hooks/useThemeColors';
-import { Link } from 'expo-router';
 import { useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { Link } from 'expo-router';
+import { Button } from '@core/components/Button';
+import { ShieldCheck } from '@core/components/Icons';
+import { useThemeColors } from '@core/hooks/useThemeColors';
+import { FONT_FAMILY, FONT_SIZE } from '@core/styles/Fonts';
 import { useFadeInStyle } from '../hooks/useFadeInStyle';
 
 export function PasswordCreationSuccess({
@@ -51,55 +52,41 @@ export function PasswordCreationSuccess({
       style={[
         styles.screen,
         successViewStyle,
-        { backgroundColor: colors.background },
+        { backgroundColor: colors.secondaryBackground },
       ]}
     >
-      <Animated.View style={[{ flex: 1, justifyContent: 'center' }]}>
-        <Animated.View
-          style={[
-            styles.circleCheck,
-            successCheckmarkStyle,
-            { backgroundColor: colors.primary },
-          ]}
-        >
+      <Animated.View style={[{ flex: 1, justifyContent: 'space-between' }]}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
           <Animated.View
             style={[
               styles.circleCheck,
-              successCheckCircleStyle,
-              { backgroundColor: colors.secondary },
+              successCheckmarkStyle,
+              { borderColor: colors.borderPrimary },
             ]}
           >
-            <ShieldCheck color={colors.text} size={120} />
+            <Animated.View
+              style={[
+                styles.circleCheck,
+                successCheckCircleStyle,
+                { borderColor: colors.borderSecondary },
+              ]}
+            >
+              <ShieldCheck color={colors.success} size={120} />
+            </Animated.View>
           </Animated.View>
-        </Animated.View>
-        <Animated.View style={[styles.textContainer, successMessageStyle]}>
-          <Text
-            style={{
-              fontSize: 24,
-              fontFamily: 'Raleway900',
-              color: colors.text,
-              textAlign: 'center',
-            }}
-          >
-            ¡Cuenta creada con éxito!
-          </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: 'Raleway600',
-              marginTop: 12,
-              marginBottom: 24,
-              color: colors.text,
-              textAlign: 'center',
-            }}
-          >
-            Ahora puedes iniciar sesión y disfrutar de una experiencia
-            protegida. 🔒
-          </Text>
-          <Link href="/login" asChild>
-            <Button text="Iniciar sesión" variant="primary" />
-          </Link>
-        </Animated.View>
+          <Animated.View style={[styles.textContainer, successMessageStyle]}>
+            <Text style={[styles.textTitle, { color: colors.text }]}>
+              ¡Cuenta creada con éxito!
+            </Text>
+            <Text style={[styles.textContent, { color: colors.text }]}>
+              Ahora puedes iniciar sesión y disfrutar de una experiencia
+              protegida. 🔒
+            </Text>
+          </Animated.View>
+        </View>
+        <Link href="/login" asChild>
+          <Button text="Iniciar sesión" variant="primary" />
+        </Link>
       </Animated.View>
     </Animated.View>
   );
@@ -110,17 +97,16 @@ const styles = StyleSheet.create({
     zIndex: 99,
     position: 'absolute',
     inset: 0,
-    height: '100%',
-    width: '120%',
-    margin: 'auto',
-    marginHorizontal: -40,
-    borderTopEndRadius: 130,
-    borderTopStartRadius: 130,
+    borderTopEndRadius: 56,
+    borderTopStartRadius: 56,
+    paddingTop: 16,
+    paddingBottom: 24,
+    paddingHorizontal: 16,
   },
   circleCheck: {
-    padding: 12,
+    padding: 16,
     alignItems: 'center',
-    borderWidth: 6,
+    borderWidth: 4,
     borderRadius: 100,
     alignSelf: 'center',
   },
@@ -128,8 +114,16 @@ const styles = StyleSheet.create({
     marginTop: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    maxWidth: '85%',
-    paddingHorizontal: 24,
-    alignSelf: 'center',
+  },
+  textTitle: {
+    fontSize: FONT_SIZE.title,
+    fontFamily: FONT_FAMILY.extrabold,
+    textAlign: 'center',
+  },
+  textContent: {
+    fontSize: FONT_SIZE.base,
+    fontFamily: FONT_FAMILY.medium,
+    marginTop: 18,
+    textAlign: 'center',
   },
 });
