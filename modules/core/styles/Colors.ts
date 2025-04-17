@@ -14,6 +14,9 @@ export const Colors = {
     secondaryLight: '#e6f2ff',
     inputColor: '#E0E0E0',
     error: '#b94f4f',
+    borderPrimary: '#4c9fff',
+    borderSecondary: '#008cff',
+    success: '#4CAF50',
   },
   dark: {
     text: '#e0e0e0',
@@ -29,5 +32,8 @@ export const Colors = {
     secondaryLight: '#1e5aa3',
     inputColor: '#1e293b',
     error: '#d36a6a',
+    borderPrimary: '#4c9fff',
+    borderSecondary: '#008cff',
+    success: '#4CAF50',
   },
 };

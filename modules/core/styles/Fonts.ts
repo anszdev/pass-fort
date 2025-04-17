@@ -16,7 +16,7 @@ export const FONT_FAMILY = {
 
 export const FONT_SIZE = {
   base: 16,
-  titile: 24,
+  title: 24,
   link: 18,
   formTitle: 32,
   sm: 14,
