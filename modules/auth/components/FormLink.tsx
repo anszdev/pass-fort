@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Link } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Link, useRouter } from 'expo-router';
 import { useThemeColors } from '@core/hooks/useThemeColors';
 
 type FormLinkProps = {
   href: any;
   textLink: string;
   description: string;
+  preventAction?: () => void;
 };
 
-export function FormLinkTop({ href, textLink, description }: FormLinkProps) {
+export function FormLinkTop({
+  href,
+  textLink,
+  description,
+  preventAction,
+}: FormLinkProps) {
+  const router = useRouter();
   const { colors } = useThemeColors();
 
   return (
@@ -18,17 +25,27 @@ export function FormLinkTop({ href, textLink, description }: FormLinkProps) {
       <Text style={[styles.formLink, { color: colors.text, opacity: 0.5 }]}>
         {description} /
       </Text>
-      <Link
-        href={href}
-        style={[styles.formLink, { color: colors.text, opacity: 1 }]}
+      <Pressable
+        onPress={() => {
+          preventAction?.();
+          router.navigate(href);
+        }}
       >
-        {textLink}
-      </Link>
+        <Text style={[styles.formLink, { color: colors.text, opacity: 1 }]}>
+          {textLink}
+        </Text>
+      </Pressable>
     </View>
   );
 }
 
-export function FormLinkBottom({ href, textLink, description }: FormLinkProps) {
+export function FormLinkBottom({
+  href,
+  textLink,
+  description,
+  preventAction,
+}: FormLinkProps) {
+  const router = useRouter();
   const { colors } = useThemeColors();
 
   return (
@@ -36,12 +53,17 @@ export function FormLinkBottom({ href, textLink, description }: FormLinkProps) {
       <Text style={[styles.formLink, { color: colors.text, opacity: 0.5 }]}>
         {description} /
       </Text>
-      <Link
-        href={href}
-        style={[styles.formLink, { color: colors.text, opacity: 1 }]}
+
+      <Pressable
+        onPress={() => {
+          preventAction?.();
+          router.navigate(href);
+        }}
       >
-        {textLink}
-      </Link>
+        <Text style={[styles.formLink, { color: colors.text, opacity: 1 }]}>
+          {textLink}
+        </Text>
+      </Pressable>
     </View>
   );
 }
