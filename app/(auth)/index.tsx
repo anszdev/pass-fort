@@ -1,10 +1,13 @@
 import { StyleSheet, View } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useNavigation, useRouter } from 'expo-router';
 import { Carrusel } from '@auth/components/Carrusel';
 import { Button } from '@core/components/Button';
 import { Container } from '@core/components/Container';
+import { useFormStore } from '@/modules/auth/store/formStore';
 
 export default function Index() {
+  const { setMode } = useFormStore();
+
   return (
     <Container>
       <Carrusel />
@@ -13,7 +16,13 @@ export default function Index() {
           <Button text="Iniciar sesión" />
         </Link>
         <Link href="/(auth)/(register)" asChild>
-          <Button text="Registrarse" variant="transparent" />
+          <Button
+            text="Registrarse"
+            variant="transparent"
+            onPress={() => {
+              setMode('register');
+            }}
+          />
         </Link>
       </View>
     </Container>
