@@ -6,6 +6,7 @@ import { FormTitle } from '@auth/components/FormTitle';
 import { FormLinkBottom, FormLinkTop } from '@auth/components/FormLink';
 import { FormContainer } from '@auth/components/FormContainer';
 import { EMAIL_RULES, PASSWORD_RULES } from '@auth/constants/formRules';
+import { useFormStore } from '@/modules/auth/store/formStore';
 
 type FormData = {
   email: string;
@@ -23,6 +24,7 @@ export default function Login() {
       password: '',
     },
   });
+  const { setMode } = useFormStore();
 
   const onSubmit = (data: FormData) => {
     console.log('data', data);
@@ -39,6 +41,9 @@ export default function Login() {
         href="/(auth)/(register)"
         textLink="Registrate"
         description="¿Aún no tienes cuenta?"
+        preventAction={() => {
+          setMode('register');
+        }}
       />
       <View style={{ gap: 24 }}>
         <InputFormControl
@@ -60,9 +65,12 @@ export default function Login() {
         />
       </View>
       <FormLinkBottom
-        href="/reset-password"
+        href="/(auth)/(register)"
         textLink="Resetéala"
         description="¿Olvidaste tu contraseña?"
+        preventAction={() => {
+          setMode('reset-password');
+        }}
       />
     </FormContainer>
   );
