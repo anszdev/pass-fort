@@ -83,7 +83,7 @@ export default function VerifyOtpCodeScreen() {
       </View>
       <FormLinkBottom
         description="¿No te llego el código?"
-        href="/"
+        href="/(auth)/login"
         textLink="Reenviar"
       />
     </FormContainer>
