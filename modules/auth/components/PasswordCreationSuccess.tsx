@@ -43,7 +43,7 @@ export function PasswordCreationSuccess({
 
   // Animation styles
   const successViewStyle = useAnimatedStyle(() => ({
-    top: withTiming(succesView.value === 1 ? 40 : 720, {
+    top: withTiming(succesView.value === 1 ? 0 : 720, {
       duration: 400,
       easing: Easing.out(Easing.exp),
     }),
@@ -111,8 +111,6 @@ const styles = StyleSheet.create({
     zIndex: 99,
     position: 'absolute',
     inset: 0,
-    borderTopEndRadius: 56,
-    borderTopStartRadius: 56,
     paddingTop: 16,
     paddingBottom: 24,
     paddingHorizontal: 16,
