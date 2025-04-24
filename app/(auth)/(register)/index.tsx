@@ -11,28 +11,22 @@ import { FormContainer } from '@auth/components/FormContainer';
 import { Steps } from '@auth/components/Steps';
 import { EMAIL_RULES } from '@auth/constants/formRules';
 import { useFormStore } from '@auth/store/formStore';
-import { type ScreenProps } from '@auth/types';
+import { type ModeScreen, type ScreenMessages } from '@/modules/auth/types';
 
 type FormData = {
   email: string;
 };
 
-type FormScreenMessages = {
-  title: string;
-  salute: string;
-  loginDescription: string;
-};
-
-const screenMessages: Record<ScreenProps['mode'], FormScreenMessages> = {
+const screenMessages: Record<ModeScreen, ScreenMessages> = {
   register: {
     title: 'Registrate ahora!',
     salute: 'Hey, bienvenid@ 👋🏽',
-    loginDescription: '¿Ya tienes cuenta?',
+    extra: '¿Ya tienes cuenta?',
   },
   'reset-password': {
     title: 'Cambiala ahora',
     salute: '¡Ups! ¿Olvidaste tu contraseña? 😅',
-    loginDescription: '¿Ya la recordaste?',
+    extra: '¿Ya la recordaste?',
   },
 };
 
@@ -76,7 +70,7 @@ export default function RegisterScreen() {
       <FormLinkTop
         href="/login"
         textLink="Inicia Sesión"
-        description={screenMessages[mode].loginDescription}
+        description={screenMessages[mode].extra || ''}
       />
       <View style={{ gap: 24 }}>
         <InputFormControl

@@ -11,9 +11,25 @@ import {
   CONFIRM_PASSWORD_RULES,
   PASSWORD_RULES,
 } from '@auth/constants/formRules';
+import { useFormStore } from '@auth/store/formStore';
+import { type ScreenMessages, type ModeScreen } from '@auth/types';
+
+const screenMessages: Record<ModeScreen, ScreenMessages> = {
+  register: {
+    title: 'Crea y confirma tu contraseña!',
+    salute: 'Hey 🙈',
+    extra: 'Crear Cuenta',
+  },
+  'reset-password': {
+    title: 'Crea y confirma tu nueva contraseña!',
+    salute: 'Hey 🙈',
+    extra: 'Cambiar Contraseña',
+  },
+};
 
 export default function PasswordScreen() {
   const [accountCreated, setAccountCreated] = useState(false);
+  const { mode } = useFormStore();
   const {
     control,
     handleSubmit,
@@ -38,7 +54,7 @@ export default function PasswordScreen() {
           <>
             <Steps steps={3} currentStep={3} />
             <Button
-              text="Crear Cuenta"
+              text={screenMessages[mode].extra || ''}
               variant="primary"
               width="fit"
               onPress={handleSubmit(createAccount)}
@@ -46,7 +62,10 @@ export default function PasswordScreen() {
           </>
         }
       >
-        <FormTitle title="Crea y confirma tu contraseña!" salute="Hey 🙈" />
+        <FormTitle
+          title={screenMessages[mode].title}
+          salute={screenMessages[mode].salute}
+        />
         <View style={{ gap: 24, marginTop: 46 }}>
           <InputFormControl
             control={control}

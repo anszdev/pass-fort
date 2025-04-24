@@ -12,6 +12,20 @@ import { ShieldCheck } from '@core/components/Icons';
 import { useThemeColors } from '@core/hooks/useThemeColors';
 import { FONT_FAMILY, FONT_SIZE } from '@core/styles/Fonts';
 import { useFadeInStyle } from '../hooks/useFadeInStyle';
+import { useFormStore } from '../store/formStore';
+import { type ModeScreen, type ScreenMessages } from '../types';
+
+const screenMessages: Record<ModeScreen, ScreenMessages> = {
+  register: {
+    title: '¡Cuenta creada con éxito!',
+    salute:
+      'Ahora puedes iniciar sesión y disfrutar de una experiencia protegida. 🔒',
+  },
+  'reset-password': {
+    title: '¡Contraseña restablecida con éxito!',
+    salute: 'Ahora puedes iniciar sesión con tu nueva contraseña. 🔒',
+  },
+};
 
 export function PasswordCreationSuccess({
   showSuccesView,
@@ -19,6 +33,7 @@ export function PasswordCreationSuccess({
   showSuccesView: boolean;
 }) {
   const { colors } = useThemeColors();
+  const { mode } = useFormStore();
 
   // Animation values
   const succesView = useSharedValue(0);
@@ -76,11 +91,10 @@ export function PasswordCreationSuccess({
           </Animated.View>
           <Animated.View style={[styles.textContainer, successMessageStyle]}>
             <Text style={[styles.textTitle, { color: colors.text }]}>
-              ¡Cuenta creada con éxito!
+              {screenMessages[mode].title}
             </Text>
             <Text style={[styles.textContent, { color: colors.text }]}>
-              Ahora puedes iniciar sesión y disfrutar de una experiencia
-              protegida. 🔒
+              {screenMessages[mode].salute}
             </Text>
           </Animated.View>
         </View>
