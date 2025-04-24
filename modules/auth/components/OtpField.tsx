@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   View,
   TextInput,
@@ -16,7 +16,7 @@ type OtpFieldProps = {
 };
 
 export function OtpField({ code, onCodeChange }: OtpFieldProps) {
-  const [currentFocus, setCurrentFocus] = useState<number | null>(0);
+  const [currentFocus, setCurrentFocus] = useState<number | null>(null);
   const otpRef = useRef<TextInput[]>([]);
   const { colors } = useThemeColors();
 
@@ -56,13 +56,6 @@ export function OtpField({ code, onCodeChange }: OtpFieldProps) {
     }
   };
 
-  useEffect(() => {
-    if (otpRef.current[0]) {
-      otpRef.current[0].focus();
-      setCurrentFocus(0);
-    }
-  }, []);
-
   return (
     <TouchableWithoutFeedback onPress={handlePasteCode}>
       <View style={styles.otpField}>
@@ -85,7 +78,6 @@ export function OtpField({ code, onCodeChange }: OtpFieldProps) {
             >
               <TextInput
                 value={code[index]}
-                autoFocus={index === 0}
                 keyboardType="numeric"
                 maxLength={1}
                 ref={(input: any) => (otpRef.current[index] = input!)}
