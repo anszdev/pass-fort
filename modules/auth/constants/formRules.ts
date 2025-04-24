@@ -12,15 +12,12 @@ export const EMAIL_RULES: RegisterOptions = {
 
 export const PASSWORD_RULES: RegisterOptions = {
   required: '🔒 La contraseña es obligatoria',
-  minLength: {
-    value: 10,
-    message: '📏 La contraseña debe tener al menos 10 caracteres',
-  },
   validate: (value: string) => {
+    const minLength = 12;
     const rules = [
       {
-        label: '📏 Al menos 10 caracteres',
-        valid: value.length >= 10,
+        label: `📏 Al menos ${minLength} caracteres`,
+        valid: value.length >= minLength,
       },
       {
         label: '🔡 Una letra minúscula',
