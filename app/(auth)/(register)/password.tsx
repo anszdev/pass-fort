@@ -29,14 +29,14 @@ const screenMessages: Record<ModeScreen, ScreenMessages> = {
 
 export default function PasswordScreen() {
   const [accountCreated, setAccountCreated] = useState(false);
-  const { mode } = useFormStore();
+  const { mode, password } = useFormStore();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      password: '',
+      password,
       confirmPassword: '',
     },
   });
