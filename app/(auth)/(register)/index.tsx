@@ -23,6 +23,19 @@ type FormScreenMessages = {
   loginDescription: string;
 };
 
+const screenMessages: Record<ScreenProps['mode'], FormScreenMessages> = {
+  register: {
+    title: 'Registrate ahora!',
+    salute: 'Hey, bienvenid@ 👋🏽',
+    loginDescription: '¿Ya tienes cuenta?',
+  },
+  'reset-password': {
+    title: 'Cambiala ahora',
+    salute: '¡Ups! ¿Olvidaste tu contraseña? 😅',
+    loginDescription: '¿Ya la recordaste?',
+  },
+};
+
 export default function RegisterScreen() {
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter();
@@ -36,19 +49,6 @@ export default function RegisterScreen() {
       email,
     },
   });
-
-  const screenMessages: Record<ScreenProps['mode'], FormScreenMessages> = {
-    register: {
-      title: 'Registrate ahora!',
-      salute: 'Hey, bienvenid@ 👋🏽',
-      loginDescription: '¿Ya tienes cuenta?',
-    },
-    'reset-password': {
-      title: 'Restablecela ahora',
-      salute: '¿Se te olvidó tu contraseña? 😒',
-      loginDescription: '¿Ya la recordaste?',
-    },
-  };
 
   const onSubmit = (data: FormData) => {
     setEmail(data.email);
