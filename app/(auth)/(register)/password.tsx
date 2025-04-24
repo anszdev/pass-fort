@@ -29,7 +29,7 @@ const screenMessages: Record<ModeScreen, ScreenMessages> = {
 
 export default function PasswordScreen() {
   const [accountCreated, setAccountCreated] = useState(false);
-  const { mode, password } = useFormStore();
+  const { mode, password, setPassword } = useFormStore();
   const {
     control,
     handleSubmit,
@@ -41,8 +41,11 @@ export default function PasswordScreen() {
     },
   });
 
-  const createAccount = () => {
-    console.log('contraseña confirmada');
+  const createAccount = (data: {
+    password: string;
+    confirmPassword: string;
+  }) => {
+    setPassword(data.password);
     setAccountCreated(true);
   };
 
