@@ -10,9 +10,9 @@ import { PasswordCreationSuccess } from '@auth/components/PasswordCreationSucces
 import {
   CONFIRM_PASSWORD_RULES,
   PASSWORD_RULES,
-} from '@/modules/auth/constants/formRules';
+} from '@auth/constants/formRules';
 
-export default function Password() {
+export default function PasswordScreen() {
   const [accountCreated, setAccountCreated] = useState(false);
   const {
     control,
