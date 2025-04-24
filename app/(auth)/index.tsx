@@ -1,9 +1,9 @@
 import { StyleSheet, View } from 'react-native';
-import { Link, useNavigation, useRouter } from 'expo-router';
-import { Carrusel } from '@auth/components/Carrusel';
+import { Link } from 'expo-router';
 import { Button } from '@core/components/Button';
 import { Container } from '@core/components/Container';
-import { useFormStore } from '@/modules/auth/store/formStore';
+import { Carrusel } from '@auth/components/Carrusel';
+import { useFormStore } from '@auth/store/formStore';
 
 export default function Index() {
   const { setMode } = useFormStore();
