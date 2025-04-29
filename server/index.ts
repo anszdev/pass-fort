@@ -3,6 +3,7 @@ const server = Bun.serve({
   fetch: (req) => {
     return new Response("Hello World");
   },
+  routes: {},
 });
 
 console.log(`Server running at http://localhost:${server.port}`);
