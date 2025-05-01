@@ -2,10 +2,10 @@ import { AuthController } from "@/controllers/auth";
 
 export const authRoutes = {
   "/": () => new Response("Hello World"),
-  "/api/auth/register": {
+  "/api/auth/send-otp": {
     POST: async (req: Request) => await AuthController.registerUser(req),
   },
-  "/api/auth/verifyOtpCode": {
+  "/api/auth/verify-otp": {
     POST: async (req: Request) => await AuthController.verifyOtp(req),
   },
   "/api/auth/login": new Response("Login"),
