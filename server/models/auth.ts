@@ -5,11 +5,12 @@ export class AuthModel {
     const { data, error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        shouldCreateUser: false,
+        shouldCreateUser: true,
       },
     });
 
     if (error) {
+      console.log(error);
       throw new Error(error.message);
     }
 
@@ -17,16 +18,20 @@ export class AuthModel {
   }
 
   static async verifyOtp({ email, token }: { email: string; token: string }) {
-    const { data, error } = await supabase.auth.verifyOtp({
-      email,
-      type: "email",
-      token,
-    });
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        type: "email",
+        token,
+      });
 
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return data.session;
+    } catch (error) {
+      throw new Error((error as Error).message);
     }
-
-    return data.session;
   }
 }
