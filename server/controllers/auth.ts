@@ -1,4 +1,5 @@
 import { validateRegisterUser, validateVerifyOtp } from "@/schemas/auth";
+import { jsonResponse } from "@/utils/responses";
 import { AuthModel } from "@models/auth";
 
 export class AuthController {
@@ -7,19 +8,23 @@ export class AuthController {
     const result = await validateRegisterUser(body);
 
     if (!result.success) {
-      return Response.json(
-        { error: result.issues[0].message },
-        { status: 400 }
+      return jsonResponse({ error: result.issues[0].message }, 400);
+    }
+
+    const registerResult = await AuthModel.register(result.output);
+
+    if (!registerResult) {
+      return jsonResponse(
+        { error: "Error al enviar el codigo de verificacion" },
+        500
       );
     }
 
-    await AuthModel.register(result.output);
-
-    return Response.json(
+    return jsonResponse(
       {
         message: `Codigo de verificacion enviado exitosamente a ${result.output.email}`,
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      200
     );
   }
 
@@ -28,19 +33,23 @@ export class AuthController {
     const result = await validateVerifyOtp(body);
 
     if (!result.success) {
-      return Response.json(
-        { error: result.issues[0].message },
-        { status: 400 }
+      return jsonResponse({ error: result.issues[0].message }, 400);
+    }
+
+    const verifyOtpResult = await AuthModel.verifyOtp(result.output);
+
+    if (!verifyOtpResult) {
+      return jsonResponse(
+        { error: "Error al verificar el codigo de verificacion" },
+        500
       );
     }
 
-    await AuthModel.verifyOtp(result.output);
-
-    return Response.json(
+    return jsonResponse(
       {
         message: `Cuenta verificada exitosamente para ${result.output.email}`,
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      200
     );
   }
 }
