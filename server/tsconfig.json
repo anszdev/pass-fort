@@ -9,11 +9,13 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
       "@models/*": ["models/*"],
       "@lib/*": ["lib/*"],
       "@controllers/*": ["controllers/*"],
-      "@routes/*": ["routes/*"]
+      "@routes/*": ["routes/*"],
+      "@schemas/*": ["schemas/*"],
+      "@utils/*": ["utils/*"],
+      "@/*": ["./*"]
     },
     // Bundler mode
     "moduleResolution": "bundler",
