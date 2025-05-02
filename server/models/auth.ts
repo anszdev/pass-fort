@@ -1,20 +1,23 @@
 import { supabase } from "@lib/supabase";
+import { jsonErrorResponse } from "@utils/responses";
 
 export class AuthModel {
   static async register({ email }: { email: string }) {
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        shouldCreateUser: true,
-      },
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: true,
+        },
+      });
 
-    if (error) {
-      console.log(error);
-      throw new Error(error.message);
+      return {
+        data,
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
     }
-
-    return data;
   }
 
   static async verifyOtp({ email, token }: { email: string; token: string }) {
@@ -25,13 +28,44 @@ export class AuthModel {
         token,
       });
 
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      return data.session;
+      return {
+        data,
+        error,
+      };
     } catch (error) {
       throw new Error((error as Error).message);
     }
+  }
+
+  static async setPassword({
+    password,
+    email,
+  }: {
+    password: string;
+    email: string;
+  }) {
+    try {
+      const { data, error } = await supabase.auth.updateUser({
+        password,
+        email,
+      });
+
+      return {
+        data,
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  static async resetPassword({ email }: { email: string }) {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   }
 }
