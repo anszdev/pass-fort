@@ -1,4 +1,4 @@
-import { AuthController } from "@/controllers/auth";
+import { AuthController } from "@controllers/auth";
 
 export const authRoutes = {
   "/": () => new Response("Hello World"),
@@ -7,6 +7,9 @@ export const authRoutes = {
   },
   "/api/auth/verify-otp": {
     POST: async (req: Request) => await AuthController.verifyOtp(req),
+  },
+  "/api/auth/set-password": {
+    POST: async (req: Request) => await AuthController.setNewPassword(req),
   },
   "/api/auth/login": new Response("Login"),
   "/api/auth/logout": new Response("Logout"),
