@@ -46,7 +46,7 @@ export class AuthController {
     if (!result.success) {
       return jsonErrorResponse({
         error: {
-          message: result.issues[0].message,
+          message: result.issues.map((issue) => issue.message).join("\n"),
           code: "VALIDATION_ERROR",
         },
         status: 400,
@@ -68,23 +68,47 @@ export class AuthController {
     return jsonSuccessResponse({
       message: "Account verified successfully",
       status: 200,
-      data,
+      data: {
+        session: data.session?.access_token,
+        token_type: data.session?.token_type,
+        expires_in: data.session?.expires_in,
+        refresh_token: data.session?.refresh_token,
+      },
     });
   }
 
   static async setNewPassword(req: Request) {
-    const body = (await req.json()) as { email: string; password: string };
+    const body = (await req.json()) as {
+      password: string;
+      refreshToken: string;
+    };
+    const token = req.headers.get("Authorization")?.split(" ")[1];
     const result = await validateVerifyPassword(body);
 
     if (!result.success) {
       return jsonErrorResponse({
         error: {
-          message: result.issues[0].message,
+          message: result.issues.map((issue) => issue.message).join("\n"),
           code: "VALIDATION_ERROR",
         },
         status: 400,
       });
     }
+
+    if (!token) {
+      return jsonErrorResponse({
+        error: {
+          message: "No token provided",
+          code: "NO_TOKEN",
+        },
+        status: 401,
+      });
+    }
+
+    await AuthModel.setSession({
+      token,
+      refreshToken: body.refreshToken,
+    });
 
     const { error, data } = await AuthModel.setPassword(result.output);
 
@@ -112,7 +136,7 @@ export class AuthController {
     if (!result.success) {
       return jsonErrorResponse({
         error: {
-          message: result.issues[0].message,
+          message: result.issues.map((issue) => issue.message).join("\n"),
           code: "VALIDATION_ERROR",
         },
         status: 400,
