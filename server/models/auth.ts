@@ -37,17 +37,32 @@ export class AuthModel {
     }
   }
 
-  static async setPassword({
-    password,
-    email,
-  }: {
-    password: string;
-    email: string;
-  }) {
+  static async setPassword({ password }: { password: string }) {
     try {
       const { data, error } = await supabase.auth.updateUser({
         password,
-        email,
+      });
+
+      return {
+        data,
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  static async setSession({
+    token,
+    refreshToken,
+  }: {
+    token: string;
+    refreshToken: string;
+  }) {
+    try {
+      const { data, error } = await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: refreshToken,
       });
 
       return {
