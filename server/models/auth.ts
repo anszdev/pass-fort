@@ -74,6 +74,34 @@ export class AuthModel {
     }
   }
 
+  static async login({ email, password }: { email: string; password: string }) {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      return {
+        data,
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  static async logout() {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      return {
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
   static async resetPassword({ email }: { email: string }) {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email);
 
