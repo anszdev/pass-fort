@@ -1,5 +1,4 @@
 import { AuthController } from "@controllers/auth";
-import { supabase } from "@lib/supabase";
 
 export const authRoutes = {
   "/": () => new Response("Hello World"),
@@ -12,17 +11,10 @@ export const authRoutes = {
   "/api/auth/set-password": {
     POST: async (req: Request) => await AuthController.setNewPassword(req),
   },
-  "/api/auth/login": {
-    GET: async (req: Request) => {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: "baezdev@gmail.com",
-        password: "AngelBaezSl18$",
-      });
-
-      console.log(data, error);
-
-      return new Response("Login");
-    },
+  "/api/auth/sign-in": {
+    POST: async (req: Request) => await AuthController.signIn(req),
   },
-  "/api/auth/logout": new Response("Logout"),
+  "/api/auth/logout": {
+    POST: async (req: Request) => await AuthController.signOut(req),
+  },
 };
