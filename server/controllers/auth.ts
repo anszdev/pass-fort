@@ -1,4 +1,5 @@
 import {
+  validateLogin,
   validateRegisterUser,
   validateVerifyOtp,
   validateVerifyPassword,
@@ -126,6 +127,76 @@ export class AuthController {
       message: "Password set successfully",
       status: 200,
       data,
+    });
+  }
+
+  static async signIn(req: Request) {
+    const body = (await req.json()) as { email: string; password: string };
+    const result = await validateLogin(body);
+
+    if (!result.success) {
+      return jsonErrorResponse({
+        error: {
+          message: result.issues.map((issue) => issue.message).join("\n"),
+          code: "VALIDATION_ERROR",
+        },
+        status: 400,
+      });
+    }
+
+    const { error, data } = await AuthModel.login(result.output);
+
+    if (error) {
+      return jsonErrorResponse({
+        error: {
+          message: error.message,
+          code: error.code,
+        },
+        status: error.status,
+      });
+    }
+
+    return jsonSuccessResponse({
+      message: "Login successful",
+      status: 200,
+      data: {
+        session: data.session?.access_token,
+        token_type: data.session?.token_type,
+        expires_in: data.session?.expires_in,
+        refresh_token: data.session?.refresh_token,
+        id: data.user?.id,
+      },
+    });
+  }
+
+  static async signOut(req: Request) {
+    const token = req.headers.get("Authorization")?.split(" ")[1];
+
+    if (!token) {
+      return jsonErrorResponse({
+        error: {
+          message: "No token provided",
+          code: "NO_TOKEN",
+        },
+        status: 401,
+      });
+    }
+
+    const { error } = await AuthModel.logout();
+
+    if (error) {
+      return jsonErrorResponse({
+        error: {
+          message: error.message,
+          code: error.code,
+        },
+        status: error.status,
+      });
+    }
+
+    return jsonSuccessResponse({
+      message: "Logout successful",
+      status: 200,
     });
   }
 
