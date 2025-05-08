@@ -17,4 +17,7 @@ export const authRoutes = {
   "/api/auth/logout": {
     POST: async (req: Request) => await AuthController.signOut(req),
   },
+  "/api/auth/resend-otp": {
+    POST: async (req: Request) => await AuthController.resendOtp(req),
+  },
 };
