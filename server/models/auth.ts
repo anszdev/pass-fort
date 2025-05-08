@@ -102,6 +102,22 @@ export class AuthModel {
     }
   }
 
+  static async resendOtp({ email }: { email: string }) {
+    try {
+      const { data, error } = await supabase.auth.resend({
+        email,
+        type: "signup",
+      });
+
+      return {
+        data,
+        error,
+      };
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
   static async resetPassword({ email }: { email: string }) {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email);
 
