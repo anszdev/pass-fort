@@ -22,7 +22,7 @@ export class AuthController {
       });
     }
 
-    const { error, data } = await AuthModel.register(result.output);
+    const { error } = await AuthModel.register(result.output);
 
     if (error) {
       return jsonErrorResponse({
@@ -197,6 +197,38 @@ export class AuthController {
     return jsonSuccessResponse({
       message: "Logout successful",
       status: 200,
+    });
+  }
+
+  static async resendOtp(req: Request) {
+    const body = (await req.json()) as { email: string };
+    const result = await validateRegisterUser(body);
+    if (!result.success) {
+      return jsonErrorResponse({
+        error: {
+          message: result.issues.map((issue) => issue.message).join("\n"),
+          code: "VALIDATION_ERROR",
+        },
+        status: 400,
+      });
+    }
+
+    const { error, data } = await AuthModel.resendOtp(result.output);
+
+    if (error) {
+      return jsonErrorResponse({
+        error: {
+          message: error.message,
+          code: error.code,
+        },
+        status: error.status,
+      });
+    }
+
+    return jsonSuccessResponse({
+      message: "Code sent successfully",
+      status: 200,
+      data,
     });
   }
 
