@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,7 @@ import { Steps } from '@auth/components/Steps';
 import { EMAIL_RULES } from '@auth/constants/formRules';
 import { useFormStore } from '@auth/store/formStore';
 import { type ModeScreen, type ScreenMessages } from '@/modules/auth/types';
+import { sendEmailCode } from '@/lib/auth';
 
 type FormData = {
   email: string;
@@ -44,8 +45,10 @@ export default function RegisterScreen() {
     },
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     setEmail(data.email);
+    const result = await sendEmailCode(data.email);
+    console.log('Code sent successfully:', result);
     router.push('/(auth)/(register)/otp-code');
   };
 

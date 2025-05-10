@@ -8,9 +8,10 @@ export async function sendEmailCode(email: string) {
     body: JSON.stringify({ email }),
   });
 
-  if (!response.ok) {
+  /* if (response.status !== 200) {
     throw new Error('Error sending email code');
-  }
+  } */
+
   const data = await response.json();
   if (data.error) {
     throw new Error(data.error);

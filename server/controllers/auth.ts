@@ -34,6 +34,7 @@ export class AuthController {
       });
     }
 
+    console.log("Code sent successfully");
     return jsonSuccessResponse({
       message: "Code sent successfully",
       status: 200,
